@@ -1,0 +1,26 @@
+FROM public.ecr.aws/lambda/python:3.13
+
+COPY ./requirements.txt ./
+
+RUN pip install -r ./requirements.txt
+
+COPY ./app ./app
+
+ARG POLICY_STORE_ID
+
+ARG SWAGGER_AUTHORIZATION_URL
+
+ARG SWAGGER_TOKEN_URL
+
+ARG ISSUER_URL
+
+ENV POLICY_STORE_ID=${POLICY_STORE_ID}
+
+ENV SWAGGER_AUTHORIZATION_URL=${SWAGGER_AUTHORIZATION_URL}
+
+ENV SWAGGER_TOKEN_URL=${SWAGGER_TOKEN_URL}
+
+ENV ISSUER_URL=${ISSUER_URL}
+
+CMD [ "app.main.handler" ]
+

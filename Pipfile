@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+mangum = "*"
+uvicorn = "*"
+pyjwt = {extras = ["crypto"], version = "*"}
+boto3 = "*"
+
+[dev-packages]
+boto3-stubs = {extras = ["verifiedpermissions"], version = "*"}
+
+[requires]
+python_version = "3.13.3"

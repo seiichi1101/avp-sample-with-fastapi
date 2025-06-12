@@ -1,0 +1,106 @@
+{
+  "FastapiApp": {
+    "commonTypes": {
+      "PersonType": {
+        "type": "Record",
+        "attributes": {
+          "email": {
+            "type": "String"
+          }
+        }
+      },
+      "ContextType": {
+        "type": "Record",
+        "attributes": {
+          "authenticated": {
+            "type": "Boolean",
+            "required": true
+          }
+        }
+      }
+    },
+    "entityTypes": {
+      "User": {
+        "shape": {
+          "type": "Record",
+          "attributes": {
+            "sub": {
+              "type": "String"
+            },
+            "personInformation": {
+              "type": "PersonType"
+            }
+          }
+        },
+        "memberOfTypes": [
+          "Tenant"
+        ]
+      },
+      "Client": {
+        "shape": {
+          "type": "Record",
+          "attributes": {}
+        }
+      },
+      "Tenant": {
+        "shape": {
+          "type": "Record",
+          "attributes": {}
+        }
+      },
+      "Application": {
+        "shape": {
+          "type": "Record",
+          "attributes": {}
+        },
+        "memberOfTypes": [
+          "Tenant"
+        ]
+      }
+    },
+    "actions": {
+      "get /tenants/{tenant_id}/items": {
+        "appliesTo": {
+          "principalTypes": [
+            "Tenant",
+            "Client"
+          ],
+          "resourceTypes": [
+            "Application"
+          ],
+          "context": {
+            "type": "ContextType"
+          }
+        }
+      },
+      "post /tenants/{tenant_id}/items": {
+        "appliesTo": {
+          "principalTypes": [
+            "Tenant",
+            "Client"
+          ],
+          "resourceTypes": [
+            "Application"
+          ],
+          "context": {
+            "type": "ContextType"
+          }
+        }
+      },
+      "get /items": {
+        "appliesTo": {
+          "principalTypes": [
+            "Tenant",
+            "Client"
+          ],
+          "resourceTypes": [
+            "Application"
+          ],
+          "context": {
+            "type": "ContextType"
+          }
+        }
+      }
+    }
+  }
+}
